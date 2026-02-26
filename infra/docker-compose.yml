@@ -1,0 +1,24 @@
+services:
+  server:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run -w @reminder/server dev"
+    volumes:
+      - ../:/app
+    env_file:
+      - ../apps/server/.env
+    mem_limit: 300m
+    ports:
+      - "8080:8080"
+
+  bot:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run -w @reminder/bot dev"
+    volumes:
+      - ../:/app
+    env_file:
+      - ../apps/bot/.env
+    mem_limit: 300m
+    depends_on:
+      - server

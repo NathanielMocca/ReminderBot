@@ -1,0 +1,27 @@
+{
+  "displayName": "ReminderBot VM No Uptime Data",
+  "documentation": {
+    "content": "No uptime metric received from reminder-bot-vm for 5 minutes. The instance may be stopped or unhealthy.",
+    "mimeType": "text/markdown"
+  },
+  "combiner": "OR",
+  "enabled": true,
+  "conditions": [
+    {
+      "displayName": "No uptime data for 5m",
+      "conditionAbsent": {
+        "filter": "resource.type=\"gce_instance\" AND resource.label.instance_id=\"1319025012753924210\" AND metric.type=\"compute.googleapis.com/instance/uptime\"",
+        "duration": "300s",
+        "trigger": {
+          "count": 1
+        },
+        "aggregations": [
+          {
+            "alignmentPeriod": "60s",
+            "perSeriesAligner": "ALIGN_MEAN"
+          }
+        ]
+      }
+    }
+  ]
+}

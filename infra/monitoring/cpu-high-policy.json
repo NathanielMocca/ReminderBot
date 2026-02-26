@@ -1,0 +1,29 @@
+{
+  "displayName": "ReminderBot VM CPU High",
+  "documentation": {
+    "content": "reminder-bot-vm CPU utilization is above 80% for 5 minutes.",
+    "mimeType": "text/markdown"
+  },
+  "combiner": "OR",
+  "enabled": true,
+  "conditions": [
+    {
+      "displayName": "CPU > 80% for 5m",
+      "conditionThreshold": {
+        "filter": "resource.type=\"gce_instance\" AND resource.label.instance_id=\"1319025012753924210\" AND metric.type=\"compute.googleapis.com/instance/cpu/utilization\"",
+        "comparison": "COMPARISON_GT",
+        "thresholdValue": 0.8,
+        "duration": "300s",
+        "trigger": {
+          "count": 1
+        },
+        "aggregations": [
+          {
+            "alignmentPeriod": "60s",
+            "perSeriesAligner": "ALIGN_MEAN"
+          }
+        ]
+      }
+    }
+  ]
+}

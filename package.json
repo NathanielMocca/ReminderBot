@@ -1,0 +1,21 @@
+{
+  "name": "discord-reminder-bot",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Discord reminder bot with Spark-only Firebase architecture",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run --workspaces build",
+    "typecheck": "npm run --workspaces typecheck",
+    "dev:bot": "npm run -w @reminder/bot dev",
+    "dev:server": "npm run -w @reminder/server dev",
+    "dev": "echo \"Run dev:bot and dev:server in separate terminals\"",
+    "deploy:gcp": "bash ./infra/scripts/deploy-gcp-vm.sh"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
